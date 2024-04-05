@@ -4,11 +4,10 @@
 που μπορεί να προκύψει από την πρόσθεση δυο bit εισόδου $a, b$.
 Για να υπολογίσουμε το άθροισμα $S$ των δυο δυαδικών ψηφίων εισόδου $a, b$ πρέπει
 το κύκλωμα να παράγει στην έξοδο του $1$ μονό όταν ένα από τα δυο ψηφία είναι
-ίσο με $1$. Αυτό μπορεί να υλοποιηθεί με τον λογικό τελεστή αποκλειστικό-NOR,
-ή εν συντομία XNOR.
+ίσο με $1$. Αυτό μπορεί να υλοποιηθεί με τον λογικό τελεστή της αποκλειστικής σύζευξης,
+ή εν συντομία XOR.
 
-\begin{figure}[h]
-    \label{fig:1}
+\begin{figure}[ht]
     \centering
     \begin{tabular}{c c|c}
         $a$ & $b$ & $a \oplus b$ \\
@@ -18,15 +17,15 @@
         1 & 0 & 1 \\
         1 & 1 & 0 \\
     \end{tabular}
-    \caption{Ο πίνακας αληθείας της κλασικής λογικής πύλης XNOR}
+    \caption{Ο πίνακας αληθείας της κλασικής λογικής πύλης XOR}
+    \label{fig:1}
 \end{figure}
 
 Για τον υπολογισμό του κρατούμενου $C$ πρέπει το κύκλωμα να παράγει στην
 έξοδο του $1$ αν και μόνο αν $a = b = 1$. Αυτή η έκφραση μπορεί να
 υλοποιηθεί με τον τελεστή σύζευξης ΚΑΙ (AND).
 
-\begin{figure}[h]
-    \label{fig:2}
+\begin{figure}[ht]
     \centering
     \begin{tabular}{c c|c}
         $a$ & $b$ & $a \cdot b = a \land b$ \\
@@ -37,13 +36,13 @@
         1 & 1 & 1 \\
     \end{tabular}
     \caption{Ο πίνακας αληθείας της κλασικής λογικής πύλης AND}
+    \label{fig:2}
 \end{figure}
 
 Γνωρίζοντας τα επιμέρους κομμάτια μπορούμε να κατασκευάσουμε το παρακάτω
 κλασικό λογικό κύκλωμα για τον ημι-αθροιστή.
 
-\begin{figure}[h]
-    \label{fig:3}
+\begin{figure}[ht]
     \centering
     \begin{circuitikz}
         \draw (0, 4)node[xor port] (xorone){}
@@ -55,17 +54,17 @@
         
         (a.east) to[short,-*] (xorone.in 1) |- (and.in 1)
         (b.east) to[short,-*] ($(b.east)!.5!(xorone.in 2)$) coordinate (branch)
-            -- (xorone.in 2)
+        -- (xorone.in 2)
         (branch) |- (and.in 2);  
     \end{circuitikz}
     \caption{Το κλασσικό κύκλωμα του ημι-αθροιστή}
+    \label{fig:3}
 \end{figure}
 
-\begin{figure}[h]
-    \label{fig:4}
+\begin{figure}[ht]
     \centering
     \begin{tabular}{c c|c c}
-        $a$ & $b$ & $s = a \oplus b$ & $c = a \cdot b$ \\
+        $a$ & $b$ & $S = a \oplus b$ & $C = a \cdot b$ \\
         \hline
         0 & 0 & 0 & 0 \\
         0 & 1 & 1 & 0 \\
@@ -73,8 +72,8 @@
         1 & 1 & 0 & 1 \\
     \end{tabular}
     \caption{Ο πίνακας αληθείας του κλασικού κυκλώματος ημι-αθροιστή}
+    \label{fig:4}
 \end{figure}
-Παρατηρώντας τ
 
 \subsection{Ο κβαντικός ημι-αθροιστής}
 Για την υλοποίησει του κβαντικού ανάλογου του ημι-αθροιστή το μόνο που
@@ -83,15 +82,14 @@
 Η λογική πύλη AND αντιστοιχεί πλήρως με την κβαντική πύλη Toffoli. Αυτό μπορούμε
 να το αποδείξουμε πολύ εύκολα σχεδιάζοντας τον πίνακα αληθείας τής.
 
-\begin{figure}[h]
-    \label{fig:5}
+\begin{figure}[ht]
     \centering
     \includegraphics{../pdf/and.pdf}
     \caption{Το διάγραμμα της κβαντικής πύλης Toffoli}
+    \label{fig:5}
 \end{figure}
 
-\begin{figure}[h]
-    \label{fig:6}
+\begin{figure}[ht]
     \centering
     \begin{tabular}{c c c|c c c}
         $a$ & $b$ & $o$ & $a'$ & $b'$ & $o'$ \\
@@ -102,21 +100,21 @@
         1 & 1 & 0 & 1 & 1 & 1 \\
     \end{tabular}
     \caption{Ο πίνακας αληθείας της κβαντική πύλης Toffoli}
+    \label{fig:6}
 \end{figure}
 
 Όπως μπορούμε να διακρύνουμε οι πίνακες αληθείας είναι πανομοιότυποι με
 αυτή της κλασικής πύλης AND. Επίσης το κβαντικό ανάλογο της κλασικής πύλης
 XOR είναι η πύλη Feynman.
 
-\begin{figure}[h]
-    \label{fig:7}
+\begin{figure}[ht]
     \centering
     \includegraphics{../pdf/xor.pdf}
     \caption{Το διάγραμμα της κβαντικής πύλης Feynman}
+    \label{fig:7}
 \end{figure}
 
-\begin{figure}[h]
-    \label{fig:8}
+\begin{figure}[ht]
     \centering
     \begin{tabular}{c c|c c}
         $a$ & $b$ & $a'$ & $b'$ \\
@@ -127,6 +125,7 @@ XOR είναι η πύλη Feynman.
         1 & 1 & 1 & 0 \\
     \end{tabular}
     \caption{Ο πίνακας αληθείας της κβαντική πύλης Feynman}
+    \label{fig:8}
 \end{figure}
 
 Γνωρίζοντας το πώς λειτουργεί ο κλασικός ημι-αθροιστής
@@ -145,11 +144,11 @@ $\ket{a}, \ket{b}$ και το qubit στόχου το $\ket{o}$. Αυτή η ε
 ότι αυτή η ενέργεια αλλάζει την κατάσταση του $\ket{b}_{new} = \ket{a} \cdot \ket{b}_{old}$.\\
 
 \begin{figure}
-    \label{fig:9}
     \centering
     \includegraphics{../pdf/half_adder.pdf}
     \caption{Το διάγραμμα του κβαντικού-λογικού κυκλώματος του ημι-αθροιστή}
+    \label{fig:9}
 \end{figure}
 
-Το τελικό διάγραμμα φαίνεται στο \ref{fig:9}.
+Το τελικό διάγραμμα φαίνεται στο Σχήμα \ref{fig:9}.
 
